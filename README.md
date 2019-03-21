@@ -1,5 +1,7 @@
 # managed-prometheus-exporter-initcontainer
 
+[![Docker Repository on Quay](https://quay.io/repository/redhat/managed-prometheus-exporter-initcontainer/status "Docker Repository on Quay")](https://quay.io/repository/redhat/managed-prometheus-exporter-initcontainer)
+
 This is designed to be an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) to populate various files for later use in Prometheus exporter containers.
 
 The operations are related to writing cluster ID, AWS region name, and AWS API credentials to various files.

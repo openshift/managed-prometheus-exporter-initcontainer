@@ -1,7 +1,7 @@
 SHELL := /usr/bin/env bash
 include version.mk
 
-IMAGE_REPO=quay.io/redhat
+IMAGE_REPO=quay.io/openshift-sre
 IMAGE_NAME=managed-prometheus-exporter-initcontainer
 
 VERSION_MAJOR=0

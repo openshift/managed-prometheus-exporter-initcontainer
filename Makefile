@@ -1,7 +1,7 @@
 SHELL := /usr/bin/env bash
 include version.mk
 
-IMAGE_REPO=quay.io/redhat
+IMAGE_REPO=quay.io/openshift-sre
 IMAGE_NAME=managed-prometheus-exporter-initcontainer
 
 VERSION_MAJOR=0
@@ -14,7 +14,7 @@ all: build tag push
 
 .PHONY: clean
 clean:
-	docker rmi $(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION_FULL) -f
+	docker rmi $(IMAGE_REPO)/$(IMAGE_NAME):latest -f
 
 .PHONY: build
 build:

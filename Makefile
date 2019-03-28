@@ -18,7 +18,7 @@ clean:
 
 .PHONY: build
 build:
-	docker build . -t $(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION_FULL)
+	docker build --pull . -t $(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION_FULL)
 
 .PHONY: tag
 tag:

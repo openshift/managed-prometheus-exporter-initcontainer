@@ -14,7 +14,7 @@ all: build tag push
 
 .PHONY: clean
 clean:
-	docker rmi $(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION_FULL) -f
+	docker rmi $(IMAGE_REPO)/$(IMAGE_NAME):latest -f
 
 .PHONY: build
 build:

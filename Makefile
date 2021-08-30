@@ -54,4 +54,4 @@ build:
 .PHONY: push
 push:
 	docker push $(IMG)
-	docker push $(IMG_LATEST
+	docker push $(IMG_LATEST)

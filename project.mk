@@ -1,5 +1,7 @@
 # Project specific values
-IMAGE_REPO=quay.io/openshift-sre
+IMAGE_REGISTRY ?= quay.io
+IMAGE_REPOSITORY ?= $(USER)
+
 IMAGE_NAME=managed-prometheus-exporter-initcontainer
 
 VERSION_MAJOR=0

@@ -25,33 +25,24 @@ endif
 ifndef VERSION_MINOR
 $(error VERSION_MINOR is not set; check project.mk file)
 endif
+ifndef CONTAINER_ENGINE
+$(error CONTAINER_ENGINE undefined)
+endif
 
-# Generate version and tag information from inputs
-COMMIT_NUMBER=$(shell git rev-list `git rev-list --parents HEAD | egrep "^[a-f0-9]{40}$$"`..HEAD --count)
-CURRENT_COMMIT=$(shell git rev-parse --short=8 HEAD)
-VERSION_FULL=$(VERSION_MAJOR).$(VERSION_MINOR).$(COMMIT_NUMBER)-$(CURRENT_COMMIT)
+default: all
 
-IMG ?= $(IMAGE_REGISTRY)/$(IMAGE_REPOSITORY)/$(IMAGE_NAME):$(VERSION_FULL)
-IMG_LATEST ?= $(IMAGE_REGISTRY)/$(IMAGE_REPOSITORY)/$(IMAGE_NAME):latest
+all: docker-build
 
-
-.PHONY: default
-default: build
-
-.PHONY: all
-all: build tag push
-
-.PHONY: clean
+.PHONY: clean docker-build docker-push build push
 clean:
-	docker rmi $(IMG) -f
-	docker rmi $(IMG_LATEST) -f
+	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) rmi $(IMG) $(IMG_LATEST) || true
 
-.PHONY: build
-build:
-	docker build --pull --build-arg UPSTREAMORG=$(IMAGE_REPOSITORY) -t $(IMG) .
-	docker tag $(IMG) $(IMG_LATEST)
+build: docker-build
+docker-build: clean
+	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) build -t $(IMG) -f Dockerfile .
+	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) tag $(IMG) $(IMG_LATEST)
 
-.PHONY: push
-push:
-	docker push $(IMG)
-	docker push $(IMG_LATEST)
+push: docker-push
+docker-push: build-image
+	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) push $(IMG)
+	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) push $(IMG_LATEST)

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make IMAGE_REPOSITORY=openshift-sre build-image
+make IMAGE_REPOSITORY=app-sre build-image

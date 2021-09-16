@@ -10,4 +10,4 @@ if [[ -z "${QUAY_TOKEN}" ]]; then
   exit 1
 fi
 
-make IMAGE_REPOSITORY=openshift-sre build push
+make IMAGE_REPOSITORY=app-sre build push

@@ -43,6 +43,6 @@ docker-build: clean
 	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) tag $(IMG) $(IMG_LATEST)
 
 push: docker-push
-docker-push: build-image
+docker-push: docker-build
 	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) push $(IMG)
 	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) push $(IMG_LATEST)

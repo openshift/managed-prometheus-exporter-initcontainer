@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 if [[ -z "${QUAY_USER}" ]]; then
   echo "QUAY_USER Undefined. Aborting."
   exit 1

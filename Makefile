@@ -46,7 +46,7 @@ push: docker-push
 docker-push: docker-build
 	@skopeo copy --dest-creds "$(QUAY_USER):$(QUAY_TOKEN)" \
 		"docker-daemon:$(IMG_LATEST)" \
-		"docker://$(IMG_LATEST)
+		"docker://$(IMG_LATEST)"
 	@skopeo copy --dest-creds "$(QUAY_USER):$(QUAY_TOKEN)" \
 		"docker-daemon:$(IMG)" \
-		"docker://$(IMG)
+		"docker://$(IMG)"

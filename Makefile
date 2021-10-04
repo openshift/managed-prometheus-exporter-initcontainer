@@ -44,5 +44,9 @@ docker-build: clean
 
 push: docker-push
 docker-push: docker-build
-	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) push $(IMG)
-	$(CONTAINER_ENGINE) --config=$(CONTAINER_ENGINE_CONFIG_DIR) push $(IMG_LATEST)
+	@skopeo copy --dest-creds "$(QUAY_USER):$(QUAY_TOKEN)" \
+		"docker-daemon:$(IMG_LATEST)" \
+		"docker://$(IMG_LATEST)
+	@skopeo copy --dest-creds "$(QUAY_USER):$(QUAY_TOKEN)" \
+		"docker-daemon:$(IMG)" \
+		"docker://$(IMG)

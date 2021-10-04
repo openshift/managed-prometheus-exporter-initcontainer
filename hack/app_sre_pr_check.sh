@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make IMAGE_REPOSITORY=app-sre build-image
+make -C $(dirname $0)/.. IMAGE_REPOSITORY=app-sre docker-build

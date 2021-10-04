@@ -10,4 +10,4 @@ if [[ -z "${QUAY_TOKEN}" ]]; then
   exit 1
 fi
 
-make IMAGE_REPOSITORY=app-sre build push
+make -C $(dirname $0)/.. IMAGE_REPOSITORY=app-sre docker-build docker-push

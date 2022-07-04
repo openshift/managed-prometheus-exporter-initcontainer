@@ -23,11 +23,11 @@ def ensure_dir(filepath):
         os.makedirs(os.path.dirname(filepath))
 
 def get_cluster_id(dclient, namespace):
-    v1b_machines = dclient.resources.get(kind='Machine')
+    v1b_machines = dclient.resources.get(api_version='machine.openshift.io/v1beta1', kind='Machine')
     return v1b_machines.get(namespace=namespace).items[0]['metadata']['labels']['machine.openshift.io/cluster-api-cluster']
 
 def get_region_id(dclient, namespace):
-    v1b_machines = dclient.resources.get(kind='Machine')
+    v1b_machines = dclient.resources.get(api_version='machine.openshift.io/v1beta1', kind='Machine')
     return v1b_machines.get(namespace=namespace).items[0]['spec']['providerSpec']['value']['placement']['region']
 
 def write_region_config(dest, regionid):
